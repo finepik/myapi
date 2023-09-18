@@ -23,4 +23,4 @@ RUN pip install -r requirements.txt
 # port where the Django app runs
 EXPOSE 8080
 # start server
-CMD python ./myapi/manage.py runserver
+CMD python ./myapi/manage.py runserver 0.0.0.0:8080
