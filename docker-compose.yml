@@ -4,6 +4,6 @@ services:
   app:
     build: .
     expose:
-      - "8000":"8000"
+      - "8000:8000"
     environment:
       DEBUG: 'true'
