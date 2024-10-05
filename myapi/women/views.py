@@ -84,3 +84,31 @@ class WomenAPIDelete(generics.RetrieveDestroyAPIView):
 #         serializer.is_valid(raise_exception=True)
 #         serializer.save()
 #         return Response({"posts": serializer.data})
+
+# class ProductsListCreateApiView(generics.ListCreateAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#
+#     def create(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+#         if serializer.is_valid():
+#             self.perform_create(serializer)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         else:
+#             print(serializer.errors.items())
+#             сustom_errors = {field: [f"Ошибка в поле '{field}': {msg}" for msg in messages] for field, messages in serializer.errors.items()}
+#             return Response(сustom_errors, status=status.HTTP_400_BAD_REQUEST)
+#
+#     def perform_create(self, serializer):
+#         # Проверка для поля title
+#         name = serializer.validated_data.get('name')
+#         if not name:
+#             raise ValidationError({"name": "Поле 'name' не должно быть пустым."})
+#
+#         # Проверка для поля price
+#         price = serializer.validated_data.get('price')
+#         if (price is None) or (not isinstance(price, decimal.Decimal)) or (price <= 0):
+#             print(type(price))
+#             raise ValidationError({"price": "Цена не должна быть пустой и должна быть положительным числом."})
+#         # Если все проверки пройдены, сохраняем объект
+#         serializer.save()
