@@ -1,15 +1,11 @@
-from django.forms import model_to_dict
-from rest_framework import generics, viewsets
-from django.shortcuts import render
-from rest_framework.decorators import action
+from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
-from .models import Women, Category
-from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from .models import Women
+from .permissions import IsAdminOrReadOnly
 from .serializers import WomenSerializer
+
 
 # class WomenViewSet(viewsets.ModelViewSet):
 #     # queryset = Women.objects.all()
@@ -29,10 +25,8 @@ from .serializers import WomenSerializer
 #         cats = Category.objects.get(pk=pk)
 #         return Response({"cats": cats.name})
 
-
-# старые варианты представления
 class WomenAPIListPagination(PageNumberPagination):
-    page_size =3
+    page_size = 3
     page_size_query_param = 'page_size'
     max_page_size = 10000
 
@@ -47,21 +41,22 @@ class WomenAPIList(generics.ListCreateAPIView):
 class WomenAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Women.objects.all()
     serializer_class = WomenSerializer
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
 
 class WomenAPIDelete(generics.RetrieveDestroyAPIView):
     queryset = Women.objects.all()
     serializer_class = WomenSerializer
-    permission_classes = (IsAdminOrReadOnly, )
+    permission_classes = (IsAdminOrReadOnly,)
 
+# старые варианты представления
 
 # class WomenAPIView(APIView):
 #     def get(self, request):
 #         w = Women.objects.all()
 #         return Response({'posts': WomenSerializer(w, many=True).data})
 #
-#     # many для того чтобы показать, что со списком данных нужно работать
+#     # many для того чтобы показать, что нужно работать со списком данных
 #
 #     def post(self, request):
 #         serializer = WomenSerializer(data=request.data)
