@@ -12,7 +12,7 @@
 
    ```bash
    git clone https://github.com/finepik/myapi.git
-   cd ваш_репозиторий
+   cd myapi
    ```
 2. **Установите зависимости**
     ```bash
